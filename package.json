@@ -1,0 +1,25 @@
+{
+  "name": "goit-js-hw-23",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --public-url ./",
+    "server": "json-server --watch ./src/js/students.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filiplitvin/goit-js-hw-23.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/filiplitvin/goit-js-hw-23/issues"
+  },
+  "homepage": "https://github.com/filiplitvin/goit-js-hw-23#readme",
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "json-server": "^1.0.0-beta.15",
+    "parcel": "^2.16.4"
+  }
+}
