@@ -37,84 +37,75 @@ const renderStudents = (students) => {
   studentsBody.innerHTML = createMarkup(students);
 };
 
-const getStudents = () => {
+const getStudents = async () => {
   const url = "http://localhost:3000/students";
-
-  return fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Error ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      renderStudents(data);
-    })
-    .catch((error) => console.log(error));
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Error ${response.statusText}`);
+    }
+    const data = await response.json();
+    renderStudents(data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const createStudent = (student) => {
+const createStudent = async (student) => {
   const url = "http://localhost:3000/students";
-
-  return fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(student),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Error ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then(() => {
-      getStudents();
-    })
-    .catch((error) => console.log(error));
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(student),
+    });
+    if (!response.ok) {
+      throw new Error(`Error ${response.statusText}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const updateStudent = (id, student) => {
+const updateStudent = async (id, student) => {
   const url = `http://localhost:3000/students/${id}`;
-
-  return fetch(url, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(student),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Error ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then(() => {
-      getStudents();
-    })
-    .catch((error) => console.log(error));
+  try {
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(student),
+    });
+    if (!response.ok) {
+      throw new Error(`Error ${response.statusText}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const deleteStudent = (id) => {
+const deleteStudent = async (id) => {
   const url = `http://localhost:3000/students/${id}`;
-
-  return fetch(url, {
-    method: "DELETE",
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Error ${response.statusText}`);
-      }
-      getStudents();
-    })
-    .catch((error) => console.log(error));
+  try {
+    const response = await fetch(url, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error(`Error ${response.statusText}`);
+    }
+    getStudents();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const handleSubmit = (event) => {
   event.preventDefault();
-
   const newStudent = {
     name: name.value,
     age: age.value,
@@ -123,8 +114,8 @@ const handleSubmit = (event) => {
     email: email.value,
     isEnrolled: isEnrolled.checked,
   };
-
   createStudent(newStudent);
+  addStudentForm.reset();
 };
 
 const handleDelete = (event) => {

@@ -5,7 +5,8 @@
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html --public-url ./",
-    "server": "json-server --watch ./src/js/students.json"
+    "server": "json-server --watch ./src/js/students.json",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
